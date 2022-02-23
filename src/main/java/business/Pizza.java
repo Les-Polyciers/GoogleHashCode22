@@ -1,4 +1,4 @@
-package exam_solution;
+package business;
 
 import lombok.RequiredArgsConstructor;
 

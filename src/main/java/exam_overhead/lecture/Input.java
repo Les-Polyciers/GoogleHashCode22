@@ -1,6 +1,6 @@
 package exam_overhead.lecture;
 
-import exam_solution.Client;
+import business.Client;
 import lombok.experimental.UtilityClass;
 
 import java.io.InputStream;

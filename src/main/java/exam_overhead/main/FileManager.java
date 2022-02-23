@@ -1,9 +1,9 @@
 package exam_overhead.main;
 
+import business.Client;
+import business.Solver;
 import exam_overhead.ecriture.Output;
 import exam_overhead.lecture.Input;
-import exam_solution.Client;
-import exam_solution.Solver;
 import lombok.experimental.UtilityClass;
 
 import java.io.File;
