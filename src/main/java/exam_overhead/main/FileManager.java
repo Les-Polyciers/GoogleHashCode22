@@ -37,8 +37,7 @@ public final class FileManager {
     Set<Client> clients = Input.read(input);
     String output = Solver.solve(clients);
 
-    String fileName = file.getName();
-    DataSetFileName dataSetFileName = new DataSetFileName(fileName);
+    DataSetFileName dataSetFileName = new DataSetFileName(file.getName());
 
     Output.write(output, dataSetFileName);
   }
