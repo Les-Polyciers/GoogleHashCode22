@@ -19,7 +19,7 @@ public final class Output {
     URI uri = Output.class.getProtectionDomain().getCodeSource().getLocation().toURI();
 
     File targetFolder = new File(uri).getParentFile();
-    File outputFolder = new File(targetFolder, "output");
+    File outputFolder = new File(targetFolder, "outputData");
 
     if (!outputFolder.isDirectory()) {
       Files.createDirectory(outputFolder.toPath());
