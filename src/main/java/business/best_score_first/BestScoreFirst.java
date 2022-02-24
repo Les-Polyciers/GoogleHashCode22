@@ -14,6 +14,8 @@ import java.util.*;
 
 public class BestScoreFirst implements Solver {
 
+  private int timeSpent = 0;
+
   @Override
   public ProblemOutputParameters solve(ProblemInputParameters inputParameters) {
 
@@ -24,11 +26,25 @@ public class BestScoreFirst implements Solver {
 
     List<OProject> oProjects =
         bestScores.stream()
+            .filter(this::givesScore)
             .map(project -> computeAssignments(project, inputParameters.getContributors()))
             .filter(Objects::nonNull)
             .toList();
 
     return new ProblemOutputParameters(oProjects);
+  }
+
+  private boolean givesScore(Project project) {
+
+    int late = timeSpent + project.getDuration() - project.getBestBefore();
+
+    boolean givesScore = late < project.getScoreForCompletion();
+
+    if (givesScore) {
+      timeSpent += project.getDuration();
+    }
+
+    return givesScore;
   }
 
   private @Nullable OProject computeAssignments(Project project, Set<Contributor> contributors) {
