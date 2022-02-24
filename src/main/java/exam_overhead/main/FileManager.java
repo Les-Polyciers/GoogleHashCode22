@@ -37,7 +37,6 @@ public final class FileManager {
   private static void computeFile(File file) throws IOException, URISyntaxException {
     InputStream input = new FileInputStream(file);
 
-    // Les deux lignes de métier
     ProblemInputParameters inputParameters = new ProblemInputParameters(input);
     ProblemOutputParameters outputParameters = Solver.solve(inputParameters);
 
