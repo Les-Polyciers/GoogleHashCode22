@@ -1,13 +1,6 @@
 package business;
 
-import lombok.experimental.UtilityClass;
+public interface Solver {
 
-@UtilityClass
-public final class Solver {
-
-  public static ProblemOutputParameters solve(ProblemInputParameters inputParameters) {
-    Client anyClient = inputParameters.getClients().stream().findAny().orElseThrow();
-    Pizza pizza = new Pizza(anyClient.getLikedIngredients());
-    return new ProblemOutputParameters(pizza);
-  }
+  ProblemOutputParameters solve(ProblemInputParameters inputParameters);
 }

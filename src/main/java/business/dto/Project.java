@@ -1,6 +1,8 @@
 package business.dto;
 
-import java.util.Set;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Project {
 
@@ -8,9 +10,15 @@ public class Project {
   private final int duration;
   private final int scoreForCompletion;
   private final int bestBefore;
-  private final Set<Skill> requiredSkills;
+  private final List<Skill> roles;
 
-  public Project(String project) {
-    // TODO
+  public Project(Scanner scannerBeginsProject) {
+    this.name = scannerBeginsProject.next();
+    this.duration = Integer.parseInt(scannerBeginsProject.next());
+    this.scoreForCompletion = Integer.parseInt(scannerBeginsProject.next());
+    this.bestBefore = Integer.parseInt(scannerBeginsProject.next());
+
+    int nbRoles = Integer.parseInt(scannerBeginsProject.next());
+    this.roles = Stream.generate(() -> new Skill(scannerBeginsProject)).limit(nbRoles).toList();
   }
 }
