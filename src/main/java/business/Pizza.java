@@ -12,8 +12,4 @@ public class Pizza {
   public String createOutput() {
     return ingredients.size() + " " + String.join(" ", ingredients);
   }
-
-  public static Pizza fromClient(Client client) {
-    return new Pizza(client.getLikedIngredients());
-  }
 }
