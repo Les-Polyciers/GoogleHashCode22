@@ -1,13 +1,14 @@
 package business.dto;
 
 import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 @Getter
-public class Project {
+public class Project implements Comparable<Project> {
 
   private final String name;
   private final int duration;
@@ -23,5 +24,20 @@ public class Project {
 
     int nbRoles = Integer.parseInt(scannerBeginsProject.next());
     this.roles = Stream.generate(() -> new Skill(scannerBeginsProject)).limit(nbRoles).toList();
+  }
+
+  public double getRatio() {
+    return ((double) scoreForCompletion) / duration;
+  }
+
+  @Override
+  public int compareTo(@NotNull Project o) {
+    if (bestBefore == o.bestBefore) {
+      return 0;
+    } else if (bestBefore > o.bestBefore) {
+      return 1;
+    } else {
+      return -1;
+    }
   }
 }

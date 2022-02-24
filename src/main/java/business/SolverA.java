@@ -31,7 +31,7 @@ public class SolverA implements Solver {
     // tri des plus urgents
     List<Project> projects =
         inputParameters.getProjects().stream()
-            .sorted(Comparator.comparing(Project::getBestBefore))
+            .sorted(projectComparators())
             .collect(Collectors.toList());
     freeContributors = new ArrayList<>(inputParameters.getContributors());
 
@@ -72,5 +72,9 @@ public class SolverA implements Solver {
                             .map(a -> new OContributor(a.getName()))
                             .collect(Collectors.toList())))
             .collect(Collectors.toList()));
+  }
+
+  private Comparator<Project> projectComparators() {
+    return Comparator.comparing(Project::getRatio).reversed().thenComparing(Project::getBestBefore);
   }
 }
