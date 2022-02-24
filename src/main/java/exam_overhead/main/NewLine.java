@@ -10,5 +10,5 @@ public final class NewLine {
 
   private static final String CRLF = CR + LF;
 
-  public static final String ANY_NEW_LINE = CR + "|" + LF + "|" + CRLF;
+  public static final String ANY_NEW_LINE = CRLF + "|" + CR + "|" + LF;
 }
