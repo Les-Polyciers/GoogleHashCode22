@@ -5,11 +5,13 @@ import business.ProblemOutputParameters;
 import business.Solver;
 import exam_overhead.ecriture.Output;
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
@@ -19,17 +21,20 @@ public final class FileManager {
 
   public static void computeAllInputFiles() throws URISyntaxException, IOException {
 
-    URL inputDataFolder =
-        Objects.requireNonNull(Main.class.getClassLoader().getResource("inputData"));
-
-    File[] inputFiles = Objects.requireNonNull(new File(inputDataFolder.toURI()).listFiles());
-
-    for (File inputFile : inputFiles) {
+    for (File inputFile : getAllInputFiles()) {
       computeFile(inputFile);
     }
   }
 
-  public static void computeFile(File file) throws IOException, URISyntaxException {
+  private static File[] getAllInputFiles() throws URISyntaxException {
+
+    @Nullable URL inputDataLocation = Main.class.getClassLoader().getResource("inputData");
+    URI inputDataFolder = Objects.requireNonNull(inputDataLocation).toURI();
+    @Nullable File[] inputFiles = new File(inputDataFolder).listFiles();
+    return Objects.requireNonNull(inputFiles);
+  }
+
+  private static void computeFile(File file) throws IOException, URISyntaxException {
     InputStream input = new FileInputStream(file);
 
     // Les deux lignes de métier
