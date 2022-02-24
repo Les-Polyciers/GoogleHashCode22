@@ -1,10 +1,13 @@
 package business.dto;
 
+import lombok.Getter;
+
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Getter
 public class Contributor {
 
   private final String name;

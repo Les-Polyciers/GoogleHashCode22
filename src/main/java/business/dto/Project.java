@@ -1,9 +1,12 @@
 package business.dto;
 
+import lombok.Getter;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
+@Getter
 public class Project {
 
   private final String name;
