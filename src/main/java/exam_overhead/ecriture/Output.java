@@ -13,13 +13,15 @@ import java.nio.file.Files;
 @UtilityClass
 public final class Output {
 
+  private static final String OUTPUT_DATA_FOLDER_NAME = "outputData";
+
   public static void write(String output, DataSetFileName dataSetFileName)
       throws URISyntaxException, IOException {
 
     URI uri = Output.class.getProtectionDomain().getCodeSource().getLocation().toURI();
 
     File targetFolder = new File(uri).getParentFile();
-    File outputFolder = new File(targetFolder, "outputData");
+    File outputFolder = new File(targetFolder, OUTPUT_DATA_FOLDER_NAME);
 
     if (!outputFolder.isDirectory()) {
       Files.createDirectory(outputFolder.toPath());
