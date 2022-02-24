@@ -43,5 +43,7 @@ public final class FileManager {
     DataSetFileName dataSetFileName = new DataSetFileName(file.getName());
 
     Output.write(outputParameters.createOutput(), dataSetFileName);
+
+    System.out.printf("Le fichier %s a été traité.%n", dataSetFileName.createInputFileName());
   }
 }
