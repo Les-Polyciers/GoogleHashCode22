@@ -43,7 +43,8 @@ public class SolverA implements Solver {
                 .forEach(
                     r -> {
                       for (Contributor contributor : freeContributors) {
-                        if (hasSkill(r, contributor)) {
+                        if (!wp.getAssignations().contains(contributor)
+                            && hasSkill(r, contributor)) {
                           wp.getAssignations().add(contributor);
                         }
                       }
