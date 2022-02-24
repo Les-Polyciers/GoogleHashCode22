@@ -4,4 +4,8 @@ public class Skill {
 
   private final String name;
   private final int level;
+
+  public Skill(String skill) {
+    // TODO
+  }
 }
