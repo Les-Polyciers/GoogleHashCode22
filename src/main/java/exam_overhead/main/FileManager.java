@@ -4,7 +4,7 @@ import business.ProblemInputParameters;
 import business.ProblemOutputParameters;
 import business.Solver;
 import exam_overhead.ecriture.Output;
-import lombok.experimental.UtilityClass;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -16,17 +16,19 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
 
-@UtilityClass
+@RequiredArgsConstructor
 public final class FileManager {
 
-  public static void computeAllInputFiles() throws URISyntaxException, IOException {
+  private final Solver solver;
+
+  public void computeAllInputFiles() throws URISyntaxException, IOException {
 
     for (File inputFile : getAllInputFiles()) {
       computeFile(inputFile);
     }
   }
 
-  private static File[] getAllInputFiles() throws URISyntaxException {
+  private File[] getAllInputFiles() throws URISyntaxException {
 
     @Nullable URL inputDataLocation = Main.class.getClassLoader().getResource("inputData");
     URI inputDataFolder = Objects.requireNonNull(inputDataLocation).toURI();
@@ -34,11 +36,11 @@ public final class FileManager {
     return Objects.requireNonNull(inputFiles);
   }
 
-  private static void computeFile(File file) throws IOException, URISyntaxException {
+  private void computeFile(File file) throws IOException, URISyntaxException {
     InputStream input = new FileInputStream(file);
 
     ProblemInputParameters inputParameters = new ProblemInputParameters(input);
-    ProblemOutputParameters outputParameters = Solver.solve(inputParameters);
+    ProblemOutputParameters outputParameters = solver.solve(inputParameters);
 
     DataSetFileName dataSetFileName = new DataSetFileName(file.getName());
 

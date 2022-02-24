@@ -1,11 +1,6 @@
 package business;
 
-import lombok.experimental.UtilityClass;
+public interface Solver {
 
-@UtilityClass
-public final class Solver {
-
-  public static ProblemOutputParameters solve(ProblemInputParameters inputParameters) {
-    // TODO
-  }
+  ProblemOutputParameters solve(ProblemInputParameters inputParameters);
 }
