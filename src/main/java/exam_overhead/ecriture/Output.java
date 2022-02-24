@@ -23,7 +23,7 @@ public final class Output {
     File targetFolder = new File(uri).getParentFile();
     File outputFolder = new File(targetFolder, OUTPUT_DATA_FOLDER_NAME);
 
-    if (!outputFolder.isDirectory()) {
+    if (!outputFolder.exists()) {
       Files.createDirectory(outputFolder.toPath());
     }
 
