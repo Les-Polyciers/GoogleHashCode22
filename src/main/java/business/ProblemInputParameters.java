@@ -1,5 +1,6 @@
 package business;
 
+import exam_overhead.main.NewLine;
 import lombok.Getter;
 
 import java.io.InputStream;
@@ -14,7 +15,8 @@ public class ProblemInputParameters {
   private final Set<Client> clients;
 
   public ProblemInputParameters(InputStream input) {
-    try (Scanner scanner = new Scanner(input).useDelimiter("\n")) {
+
+    try (Scanner scanner = new Scanner(input).useDelimiter(NewLine.ANY_NEW_LINE)) {
       int nbClients = Integer.parseInt(scanner.next());
       this.clients =
           Stream.generate(() -> new Client(scanner.next(), scanner.next()))
