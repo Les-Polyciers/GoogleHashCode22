@@ -2,6 +2,7 @@ package business;
 
 import business.dto.Contributor;
 import business.dto.Project;
+import business.dto.Skill;
 import business.dto.output.OContributor;
 import business.dto.output.OProject;
 import business.dto.work.WProject;
@@ -39,16 +40,19 @@ public class SolverA implements Solver {
         p -> {
           if (isWorthDoing(p, time)) {
             WProject wp = new WProject(p);
-            p.getRoles()
-                .forEach(
-                    r -> {
-                      for (Contributor contributor : freeContributors) {
-                        if (!wp.getAssignations().contains(contributor)
-                            && hasSkill(r, contributor)) {
-                          wp.getAssignations().add(contributor);
-                        }
-                      }
-                    });
+            boolean ok = false;
+            for (Skill r : p.getRoles()) {
+              for (Contributor contributor : freeContributors) {
+                if (!wp.getAssignations().contains(contributor) && hasSkill(r, contributor)) {
+                  wp.getAssignations().add(contributor);
+                  ok = true;
+                  break;
+                }
+              }
+              if (!ok) {
+                break;
+              }
+            }
             if (wp.getAssignations().size() == p.getRoles().size()) {
               results.add(wp);
               wp.setStart(time);
