@@ -27,7 +27,20 @@ public class Project implements Comparable<Project> {
   }
 
   public double getRatio() {
-    return ((double) scoreForCompletion) / duration;
+    return ((double) scoreForCompletion) / (duration);
+  }
+
+  public int getTeamSize() {
+    return roles.size();
+  }
+
+  public double getComplexity() {
+    var teamSize = getTeamSize();
+    return teamSize * roles.stream().mapToInt(Skill::getLevel).average().orElseThrow();
+  }
+
+  public int getEnd() {
+    return Math.max(0, bestBefore + scoreForCompletion - duration);
   }
 
   @Override

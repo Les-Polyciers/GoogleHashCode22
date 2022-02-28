@@ -1,6 +1,5 @@
 package business.dto.work;
 
-import business.dto.Contributor;
 import business.dto.Project;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ import java.util.List;
 public class WProject {
 
   private final Project project;
-  private List<Contributor> assignations = new ArrayList<>();
+  private List<Assignation> assignations = new ArrayList<>();
   private int start;
 
   public WProject(Project p) {

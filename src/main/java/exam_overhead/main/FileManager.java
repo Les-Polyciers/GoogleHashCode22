@@ -24,7 +24,9 @@ public final class FileManager {
   public void computeAllInputFiles() throws URISyntaxException, IOException {
 
     for (File inputFile : getAllInputFiles()) {
-      computeFile(inputFile);
+      if (inputFile.getName().startsWith("f_")) {
+        computeFile(inputFile);
+      }
     }
   }
 

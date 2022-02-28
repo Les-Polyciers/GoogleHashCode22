@@ -5,6 +5,7 @@ import business.dto.Project;
 import business.dto.Skill;
 import business.dto.output.OContributor;
 import business.dto.output.OProject;
+import business.dto.work.Assignation;
 import business.dto.work.WProject;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class SolverA implements Solver {
             .collect(Collectors.toList());
     freeContributors = new ArrayList<>(inputParameters.getContributors());
 
+    List<Project> removeP = new ArrayList<>();
     // si on peut pas on passe sinon on place les gens
     projects.forEach(
         p -> {
@@ -43,8 +45,8 @@ public class SolverA implements Solver {
             boolean ok = false;
             for (Skill r : p.getRoles()) {
               for (Contributor contributor : freeContributors) {
-                if (!wp.getAssignations().contains(contributor) && hasSkill(r, contributor)) {
-                  wp.getAssignations().add(contributor);
+                if (!wp.getAssignations().contains(contributor) && hasSkill(r, contributor, null)) {
+                  wp.getAssignations().add(new Assignation(contributor, r));
                   ok = true;
                   break;
                 }
@@ -54,13 +56,17 @@ public class SolverA implements Solver {
               }
             }
             if (wp.getAssignations().size() == p.getRoles().size()) {
+              removeP.add(p);
               results.add(wp);
               wp.setStart(time);
               freeContributors.removeAll(wp.getAssignations());
-              time += p.getDuration();
+              //              time += p.getDuration();
             }
           }
         });
+    if (!removeP.isEmpty()) {
+      projects.removeAll(removeP);
+    }
 
     return new ProblemOutputParameters(
         results.stream()
@@ -69,7 +75,7 @@ public class SolverA implements Solver {
                     new OProject(
                         project.getProject().getName(),
                         project.getAssignations().stream()
-                            .map(a -> new OContributor(a.getName()))
+                            .map(a -> new OContributor(a.getContributor().getName()))
                             .collect(Collectors.toList())))
             .collect(Collectors.toList()));
   }
